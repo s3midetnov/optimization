@@ -1,4 +1,4 @@
-from semester_project.loss import norm_squared, least_squares_loss, least_squares_loss_gradient, ridge_penalty, ridge_penalty_gradient
+from semester_project.loss import norm_squared
 import numpy as np
 rng = np.random.default_rng(42)
 
@@ -21,5 +21,5 @@ def test_norm_pythagorean() -> None:
 def test_norm_is_positive() -> None: 
     for _ in range(10):
         n = rng.integers(0, 100) 
-        v = rng.rng.standard_normal((n, ))
+        v = rng.standard_normal((n, ))
         assert norm_squared(v) >= 0

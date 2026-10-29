@@ -1,5 +1,6 @@
-from .type_alisases import *
-from .utils import * 
+from .type_alisases import FloatArray
+from .utils import norm_squared
+import numpy as np 
 
 def ridge_penalty(
         beta: FloatArray

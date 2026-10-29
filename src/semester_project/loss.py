@@ -1,7 +1,7 @@
 from collections.abc import Callable
 from .type_alisases import FloatArray
-from .utils import *
-from .penalty import * 
+from .utils import norm_squared
+from .penalty import ridge_penalty, ridge_penalty_gradient, lasso_penalty, soft_threshold
 
 def least_squares_loss(
     X: FloatArray,
@@ -36,7 +36,7 @@ def objective(
         X: FloatArray, 
         y: FloatArray, 
         beta: FloatArray, 
-        penalty: Callable[[FloatArray], FloatArray] , 
+        penalty: Callable[[FloatArray], float] , 
         lam: float 
 ) -> float: 
     return least_squares_loss(X, y, beta) + lam * penalty(beta)
