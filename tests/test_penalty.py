@@ -1,5 +1,10 @@
-from semester_project.penalty import soft_threshold, ridge_penalty, ridge_penalty_gradient
-import numpy as np 
+import numpy as np
+
+from semester_project.penalty import (
+    ridge_penalty,
+    ridge_penalty_gradient,
+    soft_threshold,
+)
 
 
 def test_ridge_penalty():

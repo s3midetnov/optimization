@@ -1,13 +1,10 @@
 from collections.abc import Callable
+
 from .type_alisases import FloatArray
 from .utils import norm_squared
-from .penalty import ridge_penalty, ridge_penalty_gradient, lasso_penalty, soft_threshold
 
-def least_squares_loss(
-    X: FloatArray,
-    y: FloatArray,
-    beta: FloatArray
-) -> float:
+
+def least_squares_loss(X: FloatArray, y: FloatArray, beta: FloatArray) -> float:
     """
     Compute least_squares_loss
 
@@ -24,19 +21,17 @@ def least_squares_loss(
 
 
 def least_squares_loss_gradient(
-        X: FloatArray,
-        y: FloatArray,
-        beta: FloatArray
+    X: FloatArray, y: FloatArray, beta: FloatArray
 ) -> FloatArray:
     n, _ = X.shape
     return X.T @ (X @ beta - y) / n
 
 
 def objective(
-        X: FloatArray, 
-        y: FloatArray, 
-        beta: FloatArray, 
-        penalty: Callable[[FloatArray], float] , 
-        lam: float 
-) -> float: 
+    X: FloatArray,
+    y: FloatArray,
+    beta: FloatArray,
+    penalty: Callable[[FloatArray], float],
+    lam: float,
+) -> float:
     return least_squares_loss(X, y, beta) + lam * penalty(beta)
