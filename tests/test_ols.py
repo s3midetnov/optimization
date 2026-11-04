@@ -1,8 +1,12 @@
 import numpy as np
 
-from semester_project.gradient_descent import smooth_descent, proximal_gradient_descent
+from semester_project.gradient_descent import proximal_gradient_descent, smooth_descent
 from semester_project.loss import least_squares_loss, least_squares_loss_gradient
-from semester_project.penalty import ridge_penalty, ridge_penalty_gradient, soft_threshold
+from semester_project.penalty import (
+    ridge_penalty,
+    ridge_penalty_gradient,
+    soft_threshold,
+)
 from semester_project.type_alisases import FloatArray
 
 rng = np.random.default_rng(42)
@@ -176,16 +180,17 @@ def test_ridge_analytical(lam: float) -> None:
 
 def test_lasso_1dim_1() -> None:
     eta = 0.01
+
     def parab(x: FloatArray) -> FloatArray:
         return x**2
 
     def parab_grad(x: FloatArray) -> FloatArray:
         return 2 * x
 
-    def non_smooth_penalty(x : FloatArray) -> FloatArray:
+    def non_smooth_penalty(x: FloatArray) -> FloatArray:
         return abs(x)
 
-    def proximal_fun(z : FloatArray) -> FloatArray:
+    def proximal_fun(z: FloatArray) -> FloatArray:
         return soft_threshold(z, eta)
 
     for _ in range(10):
@@ -204,16 +209,17 @@ def test_lasso_1dim_1() -> None:
 
 def test_lasso_1dim_2() -> None:
     eta = 0.001
+
     def parab(x: FloatArray) -> FloatArray:
-        return (x-3)**2
+        return (x - 3) ** 2
 
     def parab_grad(x: FloatArray) -> FloatArray:
         return 2 * (x - 3)
 
-    def non_smooth_penalty(x : FloatArray) -> FloatArray:
+    def non_smooth_penalty(x: FloatArray) -> FloatArray:
         return abs(x)
 
-    def proximal_fun(z : FloatArray) -> FloatArray:
+    def proximal_fun(z: FloatArray) -> FloatArray:
         return soft_threshold(z, eta)
 
     for _ in range(10):
@@ -226,9 +232,8 @@ def test_lasso_1dim_2() -> None:
             proximal_fun=proximal_fun,
             beta_0=beta_start,
             eta=eta,
-            max_steps=10_000
+            max_steps=10_000,
         )
 
         assert result_optimize.converged
         np.testing.assert_allclose(result_optimize.beta, np.array([2.5]))
-

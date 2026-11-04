@@ -27,6 +27,13 @@ def least_squares_loss_gradient(
     return X.T @ (X @ beta - y) / n
 
 
+def least_squares_loss_hessian(
+    X: FloatArray, y: FloatArray, beta: FloatArray
+) -> FloatArray:
+    n, _ = X.shape
+    return (X.T @ X) / n
+
+
 def objective(
     X: FloatArray,
     y: FloatArray,
