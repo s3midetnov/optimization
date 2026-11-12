@@ -1,4 +1,6 @@
 from dataclasses import dataclass
+from enum import Enum
+
 
 from .type_alisases import FloatArray
 
@@ -13,3 +15,9 @@ class OptimizationResult:
     objective_history: list[float]
     n_iter: int
     converged: bool
+
+
+class Penalty(Enum):
+    Lasso = 1
+    Ridge = 2
+

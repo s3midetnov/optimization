@@ -30,7 +30,8 @@ def smooth_descent(
         b = beta_0 - eta * grad
         grad = gradient(b)
         history.append(objective(b))
-        if norm_squared(grad) < epsi**2:
+
+        if norm_squared(grad) < epsi ** 2: 
             converged = True
             break
         beta_0 = b
